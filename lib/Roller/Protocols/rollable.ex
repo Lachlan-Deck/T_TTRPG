@@ -28,5 +28,8 @@ defmodule Roller.Constant do
   end
 end
 
-
-
+#stub
+defmodule Roller.FateDice do
+  @enforce_keys [:count]
+  defstruct [:count]
+end
