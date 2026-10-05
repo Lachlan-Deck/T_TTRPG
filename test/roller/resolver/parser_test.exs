@@ -23,11 +23,11 @@ defmodule Roller.Resolvers.ParserTest do
     end
 
     test "handles comma-separated tokens with whitespace" do
-      tokens = " 3d6 ,  4df , 5 "
+      tokens = " 3d6 ,  4 d   4 , 5 "
       assert {:ok, [r1, r2, r3]} = Parser.parser(nil, %{tokens: tokens}, nil)
 
       assert r1 >= 3 and r1 <= 18
-      assert r2 >= -4 and r2 <= 4
+      assert r2 >= 4 and r2 <= 16
       assert r3 == 5
     end
 
