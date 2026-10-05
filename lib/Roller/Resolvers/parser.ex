@@ -1,5 +1,8 @@
 # lib/Roller/Resolvers/parser.ex
 defmodule Roller.Resolvers.Parser do
+  alias Roller.Rollable
+  alias Roller.Constant
+  alias Roller.Dice
   @doc """
   this is where roll strings are taken and parsed, then the roll interface is
   used to return a roll result
@@ -23,17 +26,16 @@ defmodule Roller.Resolvers.Parser do
   end
 
   defp evaluate_token(token_str) do
-      case parse_rollable(token_str) do
-        {:ok, rollable} ->
-          Rollable.roll(rollable)
+    case parse_rollable(token_str) do
+      {:ok, rollable} ->
+        Rollable.roll(rollable)
 
-        {:error, reason} ->
-          {:error, reason}
-      end
+      {:error, reason} ->
+        {:error, reason}
+    end
   end
 
-
-  parse_rollable(str) do
+  defp parse_rollable(str) do
     cond do
       # Standard dice match: "3d6"
       match = Regex.run(~r/^(\d+)d(\d+)$/i, str) ->
@@ -48,4 +50,5 @@ defmodule Roller.Resolvers.Parser do
       true ->
         {:error, "Unsupported roll pattern: #{str}"}
     end
+  end
 end
