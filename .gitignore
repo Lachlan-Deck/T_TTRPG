@@ -22,3 +22,10 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 t_ttrpg-*.tar
 
+/.postgres/base/1
+/.postgres/base/16388
+/.postgres/base/4
+/.postgres/base/5
+/.postgres/global
+/.postgres
+/postgres.log
