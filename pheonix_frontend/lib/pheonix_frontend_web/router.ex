@@ -1,3 +1,4 @@
+# lib/pheonix_frontend_web/router.ex
 defmodule PheonixFrontendWeb.Router do
   use PheonixFrontendWeb, :router
 
@@ -14,12 +15,15 @@ defmodule PheonixFrontendWeb.Router do
     plug :accepts, ["json"]
   end
 
+
   scope "/", PheonixFrontendWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", RollPageLive
+    get "/hello", HelloController, :index
+    get "/hello/:messenger", HelloController, :show
+    live "hello_live_view", HelloLiveView 
   end
-
   # Other scopes may use custom stacks.
   # scope "/api", PheonixFrontendWeb do
   #   pipe_through :api
