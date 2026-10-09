@@ -28,8 +28,13 @@ defmodule Roller.Constant do
   end
 end
 
-#stub
 defmodule Roller.FateDice do
   @enforce_keys [:count]
   defstruct [:count]
+
+  defimpl Roller.Rollable do
+    def roll(%Roller.FateDice{count: count}) do
+      Enum.sum(for _ <- 1..count, do: Enum.random(-1..1))
+    end
+  end
 end

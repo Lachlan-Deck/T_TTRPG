@@ -1,5 +1,7 @@
+# /lib/Phoenix_frontend_web/components/live/input_roll_component.ex
 defmodule PhoenixFrontendWeb.Components.InputRollComponent do
   use Phoenix.LiveComponent
+  require Logger
 
   def render(assigns) do
     ~H"""
@@ -28,10 +30,10 @@ defmodule PhoenixFrontendWeb.Components.InputRollComponent do
   end
   
   def handle_event("submit_roll", %{"roll_string" => roll_string}, socket) do
+    Logger.info("[InputRollComponent] Received submit_roll with: #{inspect(roll_string)}")
     if String.trim(roll_string) != "" do            
       send(self(), {:make_roll, roll_string})
     end
     {:noreply, socket}
   end
-
 end

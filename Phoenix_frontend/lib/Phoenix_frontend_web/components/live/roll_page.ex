@@ -1,7 +1,9 @@
 defmodule PhoenixFrontendWeb.RollPageLive do
   use PhoenixFrontendWeb, :live_view
 
-  alias PhoenixFrontendWeb.{RollHistoryComponent, InputRollComponent}
+  require Logger
+  
+  alias PhoenixFrontendWeb.Components.{RollHistoryComponent, InputRollComponent}
   alias PhoenixFrontendWeb.HandleRoll
 
   def mount(_params, _session, socket) do
@@ -10,6 +12,7 @@ defmodule PhoenixFrontendWeb.RollPageLive do
 
   # Listens for the message sent from the InputRollComponent
   def handle_info({:make_roll, roll_string}, socket) do
+    Logger.info("[RollPageLive] Processing roll request string: #{inspect(roll_string)}")
     new_item =
       case HandleRoll.roll(roll_string) do
         {:ok, result_list} ->
@@ -21,6 +24,7 @@ defmodule PhoenixFrontendWeb.RollPageLive do
           }
 
         {:error, reason} ->
+          Logger.error("[RollPageLive]: Roll error encountered: #{inspect(reason)}")
           %{
             id: System.unique_integer([:positive]),
             input: roll_string,
@@ -45,14 +49,14 @@ defmodule PhoenixFrontendWeb.RollPageLive do
 
       <!-- Chat History Live Component -->
       <.live_component
-        module={RollHistoryComponent}
+        module={PhoenixFrontendWeb.Components.RollHistoryComponent}
         id="chat-history"
         history={@history}
       />
 
       <!-- Input Roll Live Component -->
       <.live_component
-        module={InputRollComponent}
+        module={PhoenixFrontendWeb.Components.InputRollComponent}
         id="input-roll"
       />
     </main>
