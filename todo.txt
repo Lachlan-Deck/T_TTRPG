@@ -1,3 +1,7 @@
 x 2026-09-30 2026-09-25 as a dev i want to use ts types on the handleRoll action// update: figure out state structure of handleRoll \n return state must always exist, and must contain a message as to what happended or a succes data
 x 2026-09-30 2026-09-25 as a dev i want to have clear types in my elixir resolvers
 x 2026-10-05 2026-09-25 as a dev i want to have unit tests for the parser
+x 2026-10-09 2026-10-09 as a user i want to roll dice with the syntax "*d*" so that i can see the random result Update: mostly working but addition doesnt, i think its due to malformed json
+2026-10-09 as a user i want my dice rolls to have a per dice result so that i can see what i got on my dice rolls
+x 2026-10-09 2026-10-09 as a user i want the react and Phoenix frontends to look the same
+x 2026-10-09 2026-10-09 need to fix query parsing, + 5 works, 5 + 5 doesnt, need to add unit testing for this
