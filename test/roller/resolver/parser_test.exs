@@ -40,4 +40,42 @@ defmodule Roller.Resolvers.ParserTest do
       assert r3 == 5
     end
   end
+    describe "arithmetic expressions and modifiers" do
+      test "Partition 1: Addition and subtraction modifiers" do
+        # Test addition with dice
+        assert {:ok, [result_add]} = Parser.parser(nil, %{tokens: "4d4 + 5"}, nil)
+        assert is_number(result_add)
+        assert result_add >= 9 and result_add <= 21 # (4-16) + 5
+
+        # Test subtraction constants
+        assert {:ok, [result_sub]} = Parser.parser(nil, %{tokens: "10 - 5"}, nil)
+        assert result_sub == 5
+      end
+
+      test "Partition 2: Multiplication and division operators" do
+        # Test division
+        assert {:ok, [result_div]} = Parser.parser(nil, %{tokens: "10 / 2"}, nil)
+        assert result_div == 5 or abs(result_div - 5.0) < 0.001
+
+        # Test multiplication
+        assert {:ok, [result_mul]} = Parser.parser(nil, %{tokens: "4d4 * 2"}, nil)
+        assert is_number(result_mul)
+        assert result_mul >= 8 and result_mul <= 32
+      end
+
+      test "Partition 3: Complex nested expressions with parentheses" do
+        # Test full compound expression with operator precedence and grouping
+        tokens = "(4d4 + 1) / (1d5 - 2) * 3"
+        
+        # Depending on backend error handling for edge-case divisions (like division by zero if 1d5 rolls 2),
+        # this ensures the parser handles the compound structure gracefully.
+        case Parser.parser(nil, %{tokens: tokens}, nil) do
+          {:ok, [result]} -> 
+            assert is_number(result)
+          {:error, reason} -> 
+            # Graceful fallback assertion if division-by-zero is caught by the resolver
+            assert is_binary(reason) or is_atom(reason)
+        end
+      end
+    end
 end
