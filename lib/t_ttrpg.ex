@@ -12,9 +12,9 @@ defmodule TTtrpg do
 
   def start(_type, _args) do
     children = [
-      {Plug.Cowboy, scheme: :http, plug: Roller.Routers.Router, options: [port: 8088]}
+      {Plug.Cowboy, scheme: :http, plug: Systems.Router, options: [port: 8088]}
     ]
-    opts = [strategy: :one_for_one, name: Roller.Supervisor]
+    opts = [strategy: :one_for_one, name: Systems.Supervisor]
     Logger.info("Starting application...")
     Supervisor.start_link(children, opts)
   end  
