@@ -55,10 +55,10 @@ this is not ready for users or contributors, if your that interested you should 
     └── systems
 ```
 
-## architecture
-the api is being implemented as an event driven ecs style "game engine", I like ECS (entity, component, system) because i often find when I've implemented something poorly, and cant extend it, going back and using ECS allows me to do more complicated things with simpler feeling code.
+## Architecture
+the api is being implemented as an event driven ecs style "game engine", I like ECS (entity, component, system) because i often find when I've implemented something poorly, and can't extend it, going back and using ECS allows me to do more complicated things with simpler feeling code.
 
-for example a feature i want to implement in the future is for users to be able to upload character sheats as .txt files, eg:
+for example a feature I want to implement in the future, is for users to be able to upload character sheets as .txt files, eg:
 ```
 name: gandalf
 str: 12, 1
