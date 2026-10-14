@@ -1,6 +1,7 @@
 # TTtrpg
 this is a hobby project dice rolling api, written in elixir
-[Frontend Demo](assets/T_TTRPG_demo.gif)
+
+![Frontend Demo](assets/T_TTRPG_demo.gif)
 
 ## Installation
 this is not ready for users or contributors, if your that interested you should fork and do your own thing (or maybe just start from scratch XD)
