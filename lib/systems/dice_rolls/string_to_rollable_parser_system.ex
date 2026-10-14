@@ -39,7 +39,7 @@ defmodule Systems.StringToRollableParser do
 # ███████╗███████╗███████╗███████╗███████╗███████╗███████╗
 # ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
 
-@spec parse_all(String.t()) :: {:ok, list(list(term()))} | {:error, String.t()}
+  @spec parse_all(String.t()) :: {:ok, list(list(term()))} | {:error, String.t()}
   def parse_all(string) when is_binary(string) do
     roll_strings = String.split(string, ",")
 
@@ -54,7 +54,7 @@ defmodule Systems.StringToRollableParser do
 # ███████╗███████╗███████╗███████╗███████╗███████╗███████╗
 # ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
 
-@spec parse_one(String.t()) :: {:ok, term() | list(term())}
+  @spec parse_one(String.t()) :: {:ok, term() | list(term())}
   def parse_one(token) when is_binary(token) do
     trimmed = String.trim(token)
 

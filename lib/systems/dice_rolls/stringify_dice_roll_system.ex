@@ -12,9 +12,9 @@ defmodule Systems.DiceRolls.StringifyDiceRollSystem do
   alias Components.RollString.NormalDiceComponent
   alias Components.RollString.OperatorComponent
   alias Components.RollString.UnParsedComponent
-                                                        
-# ███████╗███████╗███████╗███████╗███████╗███████╗███████╗
-# ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
+
+  # ███████╗███████╗███████╗███████╗███████╗███████╗███████╗
+  # ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
 
   @spec stringify(list(term()) | list(list(term()))) ::
           {:ok, String.t(), number()} | {:ok, list({String.t(), number()})}
@@ -28,9 +28,8 @@ defmodule Systems.DiceRolls.StringifyDiceRollSystem do
     end
   end
 
-                                                        
-# ███████╗███████╗███████╗███████╗███████╗███████╗███████╗
-# ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
+  # ███████╗███████╗███████╗███████╗███████╗███████╗███████╗
+  # ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
 
   @spec stringify_single(list(term())) :: {:ok, String.t(), number()}
   defp stringify_single(components) do
@@ -44,16 +43,15 @@ defmodule Systems.DiceRolls.StringifyDiceRollSystem do
     {:ok, exploded_string, total}
   end
 
-
-                                                        
-# ███████╗███████╗███████╗███████╗███████╗███████╗███████╗
-# ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
+  # ███████╗███████╗███████╗███████╗███████╗███████╗███████╗
+  # ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
 
   @doc """
   Convenience function that converts rolled components directly into 
   ready-to-display strings for API responses.
   """
-  @spec format_for_api(list(term()) | list(list(term()))) :: {:ok, list(String.t())} | {:error, term()}
+  @spec format_for_api(list(term()) | list(list(term()))) ::
+          {:ok, list(String.t())} | {:error, term()}
   def format_for_api(rolls) do
     case stringify(rolls) do
       {:ok, results} when is_list(results) ->
@@ -67,9 +65,9 @@ defmodule Systems.DiceRolls.StringifyDiceRollSystem do
         error
     end
   end
-  
-# ███████╗███████╗███████╗███████╗███████╗███████╗███████╗
-# ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
+
+  # ███████╗███████╗███████╗███████╗███████╗███████╗███████╗
+  # ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
 
   # Calculate the final numeric total taking operators into account
   defp calculate_total(components) do
@@ -93,15 +91,16 @@ defmodule Systems.DiceRolls.StringifyDiceRollSystem do
             {acc, op}
         end
       end)
+
     total
   end
 
-# ██╗  ██╗███████╗██╗     ██████╗ ███████╗██████╗ ███████╗
-# ██║  ██║██╔════╝██║     ██╔══██╗██╔════╝██╔══██╗██╔════╝
-# ███████║█████╗  ██║     ██████╔╝█████╗  ██████╔╝███████╗
-# ██╔══██║██╔══╝  ██║     ██╔═══╝ ██╔══╝  ██╔══██╗╚════██║
-# ██║  ██║███████╗███████╗██║     ███████╗██║  ██║███████║
-# ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝
+  # ██╗  ██╗███████╗██╗     ██████╗ ███████╗██████╗ ███████╗
+  # ██║  ██║██╔════╝██║     ██╔══██╗██╔════╝██╔══██╗██╔════╝
+  # ███████║█████╗  ██║     ██████╔╝█████╗  ██████╔╝███████╗
+  # ██╔══██║██╔══╝  ██║     ██╔═══╝ ██╔══╝  ██╔══██╗╚════██║
+  # ██║  ██║███████╗███████╗██║     ███████╗██║  ██║███████║
+  # ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝╚══════╝
 
   # Format each component into a bracketed token string
   defp format_component(%NormalDiceComponent{res_value: val}), do: "(#{val})"
@@ -109,15 +108,14 @@ defmodule Systems.DiceRolls.StringifyDiceRollSystem do
   defp format_component(%FateDiceComponent{res_value: val}), do: "(#{val})"
   defp format_component(%OperatorComponent{operator: op, value: val}), do: "(#{op}#{val})"
   defp format_component(%UnParsedComponent{raw: raw}), do: "(#{raw})"
-  
+
   # Helper math operations
   defp apply_op(acc, "+", val), do: acc + val
   defp apply_op(acc, "-", val), do: acc - val
   defp apply_op(acc, "*", val), do: acc * val
   defp apply_op(acc, "/", val) when val != 0, do: acc / val
   defp apply_op(acc, _, _), do: acc
-  
-# ███████╗███████╗███████╗███████╗███████╗███████╗███████╗
-# ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
 
+  # ███████╗███████╗███████╗███████╗███████╗███████╗███████╗
+  # ╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝╚══════╝
 end
