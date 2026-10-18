@@ -27,6 +27,7 @@ defmodule TTtrpg.MixProject do
       {:jason, "~>1.4.5"},
       {:bandit, "~>1.12"},
       {:plug_cowboy, "~>2.9.0"},
+      {:phoenix_pubsub, "~> 2.0"}
     ]
 
   end
