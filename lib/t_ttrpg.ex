@@ -16,6 +16,7 @@ defmodule TTtrpg do
     children = [
       {Plug.Cowboy, scheme: :http, plug: Systems.Router, options: [port: 8088]},
       {Phoenix.PubSub, name: TTtrpg.PubSub},
+      Systems.DiceRollHandler
     ]
 
     opts = [strategy: :one_for_one, name: Systems.Supervisor]
