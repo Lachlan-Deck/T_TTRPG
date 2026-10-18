@@ -1,4 +1,4 @@
-defmodule Systems.DiceRolls.StringifyDiceRollSystem do
+defmodule Systems.StringifyDiceRollSystem do
   @doc """
   this system takes rolled RollString components (ones that have a value of
   not 0) and returns a stringified version of them so that the user can see
